@@ -10,6 +10,8 @@ import numpy as np
 import sklearn.linear_model as lin_reg
 from sklearn.model_selection import train_test_split as split
 from sklearn.linear_model import LinearRegression
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 def main():
     #setup util functions
@@ -27,8 +29,12 @@ def main():
     # uprt("Columns", data.columns.values.tolist())
 
     #pull out target column
-    y = data["PriceUSD"]
-    X = data.loc[:, data.columns != "PriceUSD"]
+    price = "PriceUSD"
+    date = "date"
+    y = data[price].fillna(0)
+    # X = data.iloc[:, data.columns == date]
+    X = pd.DataFrame(range(1, (y.size+1)))
+    # uprt(X)
 
     #split dataset
     xtrain, xtest, ytrain, ytest = split(X, y)
@@ -38,7 +44,16 @@ def main():
     # uprt("\nxtest:", xtest)
     # uprt("\nytest:", ytest)
     
-    # regression = LinearRegression(fit_intercept=False).fit(X, y) 
+    regression = LinearRegression(fit_intercept=False)
+    regression.fit(X,y)
+    uprt(regression.intercept_)
+
+    # coefs = {"y-intercept": format(regression.intercept_, ".2f"),
+    #         "B1": format(regression.coef_[0], ".2f")}
+    #         # "B2": format(regression.coef_[1], ".2f")}
+
+    # for key, val in coefs.items(): 
+    #     uprt(key,": ", val)
 
 if __name__ == "__main__":
     main()
