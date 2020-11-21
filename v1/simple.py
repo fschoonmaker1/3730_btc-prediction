@@ -16,6 +16,3 @@ print(type(data))
 print(data.head(5))
 # Data metrics
 print(data.describe())
-
-
-

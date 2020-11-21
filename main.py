@@ -9,6 +9,7 @@ import pandas as pd
 import numpy as np
 import sklearn.linear_model as lin_reg
 from sklearn.model_selection import train_test_split as split
+from sklearn.linear_model import LinearRegression
 
 def main():
     #setup util functions
@@ -23,7 +24,7 @@ def main():
     data = pd.read_csv("./btc.csv")
 
     #print columns
-    uprt("Columns", data.columns.values.tolist())
+    # uprt("Columns", data.columns.values.tolist())
 
     #pull out target column
     y = data["PriceUSD"]
@@ -32,10 +33,12 @@ def main():
     #split dataset
     xtrain, xtest, ytrain, ytest = split(X, y)
     #print split data sets
-    uprt("\nxtrain:", xtrain)
-    uprt("\nytrain:", ytrain)
-    uprt("\nxtest:", xtest)
-    uprt("\nytest:", ytest)
+    # uprt("\nytrain:", ytrain)
+    # uprt("\nxtrain:", xtrain)
+    # uprt("\nxtest:", xtest)
+    # uprt("\nytest:", ytest)
+    
+    # regression = LinearRegression(fit_intercept=False).fit(X, y) 
 
 if __name__ == "__main__":
     main()
